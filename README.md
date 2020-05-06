@@ -11,10 +11,11 @@ Prime Numbers API is a server application, which provides REST API for two funct
 You will need the following tools:
     
 - .NET Core SDK 3.1
+    
+or
+- Docker
 
-### Setup 
-
-Follow these steps to get your development environment set up:
+### Setup with .NET Core SDK
 
 1. Clone the repository
 
@@ -35,6 +36,19 @@ dotnet run
 ```
 
 5. Launch http://localhost:5000 in your browser to view the Swagger UI
+
+### Setup with Docker
+
+1. Clone the repository
+
+2. Within the `PrimeNumbers.API` directory, launch the container by
+
+```
+docker-compose build
+docker-compose up
+```
+
+3. Launch http://localhost:80 in your browser to view the Swagger UI
 
 ## Used Technologies
 * .NET Core 3
