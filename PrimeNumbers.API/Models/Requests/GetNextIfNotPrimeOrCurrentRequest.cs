@@ -2,6 +2,6 @@
 {
     public class GetNextIfNotPrimeOrCurrentRequest
     {
-        public string Number { get; set; }
+        public int? Number { get; set; }
     }
 }

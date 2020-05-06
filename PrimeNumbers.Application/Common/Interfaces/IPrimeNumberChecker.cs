@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PrimeNumbers.Application.Interfaces
+namespace PrimeNumbers.Application.Common.Interfaces
 {
     public interface IPrimeNumberChecker
     {

@@ -1,4 +1,4 @@
-﻿using PrimeNumbers.Application.Interfaces;
+﻿using PrimeNumbers.Application.Common.Interfaces;
 using System.Threading.Tasks;
 
 namespace PrimeNumbers.Toolbox
@@ -7,9 +7,9 @@ namespace PrimeNumbers.Toolbox
     {
         public Task<bool> CheckAsync(int number)
         {
-            if (number == 2 || number == 3)
+            if(number <= 1)
             {
-                return Task.FromResult(true);
+                return Task.FromResult(false);
             }
 
             for(int i = 2; i * i <= number; i++)

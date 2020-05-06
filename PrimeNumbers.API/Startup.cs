@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PrimeNumbers.API.Profiles;
-using PrimeNumbers.Application.Extensions;
+using PrimeNumbers.Application;
 using PrimeNumbers.Toolbox.Extensions;
 using System;
 using System.IO;
@@ -27,10 +27,9 @@ namespace PrimeNumbers.API
         {
             services.AddControllers();
 
-            services
-                .AddAutoMapper(typeof(RequestToServiceRequestProfile).Assembly)
-                .RegisterApplicationDependencies()
-                .RegisterPrimerNumbersToolboxDependencies();
+            services.AddAutoMapper(typeof(RequestToServiceRequestProfile).Assembly);
+            services.RegisterApplicationDependencies();
+            services.RegisterPrimerNumbersToolboxDependencies();
 
             services.AddSwaggerGen(c =>
             {

@@ -1,4 +1,4 @@
-﻿using PrimeNumbers.Application.Interfaces;
+﻿using PrimeNumbers.Application.Common.Interfaces;
 using System;
 using System.Threading.Tasks;
 
