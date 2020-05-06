@@ -41,7 +41,7 @@ dotnet run
 
 1. Clone the repository
 
-2. Within the `PrimeNumbers.API` directory, launch the container by
+2. At the root directory, launch the container by:
 
 ```
 docker-compose build
