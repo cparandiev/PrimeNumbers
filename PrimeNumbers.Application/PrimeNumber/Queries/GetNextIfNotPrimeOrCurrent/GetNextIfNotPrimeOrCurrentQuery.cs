@@ -4,11 +4,11 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurren
 {
     public class GetNextIfNotPrimeOrCurrentQuery : IRequest<NextPrimeNumberVm>
     {
-        public GetNextIfNotPrimeOrCurrentQuery(int number)
+        public GetNextIfNotPrimeOrCurrentQuery(int? number)
         {
             Number = number;
         }
 
-        public int Number { get; }
+        public int? Number { get; }
     }
 }

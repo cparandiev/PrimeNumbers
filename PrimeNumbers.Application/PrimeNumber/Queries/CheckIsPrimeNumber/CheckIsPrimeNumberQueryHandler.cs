@@ -15,8 +15,8 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.CheckIsPrimeNumber
         }
         public async Task<PrimeNumberVm> Handle(CheckIsPrimeNumberQuery request, CancellationToken cancellationToken)
         {
-            var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number);
-            var response = new PrimeNumberVm(request.Number, isPrimeNumber);
+            var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number.Value);
+            var response = new PrimeNumberVm(request.Number.Value, isPrimeNumber);
 
             return response;
         }

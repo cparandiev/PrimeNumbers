@@ -19,13 +19,13 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurren
 
         public async Task<NextPrimeNumberVm> Handle(GetNextIfNotPrimeOrCurrentQuery request, CancellationToken cancellationToken)
         {
-            var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number);
+            var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number.Value);
 
-            var nextPrimeNumber = request.Number;
+            var nextPrimeNumber = request.Number.Value;
 
             if (!isPrimeNumber)
             {
-                nextPrimeNumber = await _primeNumberGenerator.GetNextPrimeNumberAsync(request.Number);
+                nextPrimeNumber = await _primeNumberGenerator.GetNextPrimeNumberAsync(request.Number.Value);
             }
 
             var response = new NextPrimeNumberVm(nextPrimeNumber);

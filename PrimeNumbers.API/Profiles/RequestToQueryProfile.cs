@@ -5,9 +5,9 @@ using PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent;
 
 namespace PrimeNumbers.API.Profiles
 {
-    public class RequestToServiceRequestProfile : Profile
+    public class RequestToQueryProfile : Profile
     {
-        public RequestToServiceRequestProfile()
+        public RequestToQueryProfile()
         {
             CreateMap<CheckIsPrimeNumberRequest, CheckIsPrimeNumberQuery>();
             CreateMap<GetNextIfNotPrimeOrCurrentRequest, GetNextIfNotPrimeOrCurrentQuery>();

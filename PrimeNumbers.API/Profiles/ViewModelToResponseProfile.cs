@@ -5,9 +5,9 @@ using PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent;
 
 namespace PrimeNumbers.API.Profiles
 {
-    public class ServiceResponseToResponseProfile : Profile
+    public class ViewModelToResponseProfile : Profile
     {
-        public ServiceResponseToResponseProfile()
+        public ViewModelToResponseProfile()
         {
             CreateMap<NextPrimeNumberVm, GetNextIfNotPrimeOrCurrentResponse>();
             CreateMap<PrimeNumberVm, CheckIsPrimeNumberResponse>();

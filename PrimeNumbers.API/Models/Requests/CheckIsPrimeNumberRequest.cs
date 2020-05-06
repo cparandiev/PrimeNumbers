@@ -2,6 +2,6 @@
 {
     public class CheckIsPrimeNumberRequest
     {
-        public int Number { get; set; }
+        public int? Number { get; set; }
     }
 }

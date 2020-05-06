@@ -1,16 +1,20 @@
+using System;
+using System.IO;
+using System.Reflection;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PrimeNumbers.API.Common;
 using PrimeNumbers.API.Profiles;
 using PrimeNumbers.Application;
+using PrimeNumbers.Application.Common.Interfaces;
 using PrimeNumbers.Toolbox.Extensions;
-using System;
-using System.IO;
-using System.Reflection;
+
 
 namespace PrimeNumbers.API
 {
@@ -25,12 +29,14 @@ namespace PrimeNumbers.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
-            services.AddAutoMapper(typeof(RequestToServiceRequestProfile).Assembly);
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IPrimeNumberChecker>());
+            
+            services.AddAutoMapper(typeof(RequestToQueryProfile).Assembly);
             services.RegisterApplicationDependencies();
             services.RegisterPrimerNumbersToolboxDependencies();
 
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Prime numbers API", Version = "v1" });
@@ -55,6 +61,8 @@ namespace PrimeNumbers.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCustomExceptionHandler();
 
             app.UseHttpsRedirection();
 
