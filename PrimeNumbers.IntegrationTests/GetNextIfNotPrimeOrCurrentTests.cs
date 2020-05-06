@@ -1,7 +1,7 @@
 ﻿using Http.QueryString.Factories;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using PrimeNumbers.API.Models.Requests;
+using PrimeNumbers.IntegrationTests.Models.Requests;
 using PrimeNumbers.IntegrationTests.Models.Responses;
 using System.Net;
 using System.Net.Http;
@@ -10,13 +10,13 @@ using Xunit;
 
 namespace PrimeNumbers.IntegrationTests
 {
-    public class CheckIsPrimeNumbersTests
+    public class GetNextIfNotPrimeOrCurrentTests
         : IClassFixture<PrimeNumbersWebApplicationFactory<PrimeNumbers.API.Startup>>
     {
         private readonly HttpClient _client;
         private readonly QueryStringFactory _queryStringFactory;
 
-        public CheckIsPrimeNumbersTests(PrimeNumbersWebApplicationFactory<PrimeNumbers.API.Startup> factory)
+        public GetNextIfNotPrimeOrCurrentTests(PrimeNumbersWebApplicationFactory<PrimeNumbers.API.Startup> factory)
         {
             _client = factory.CreateClient(new WebApplicationFactoryClientOptions
             {
@@ -26,42 +26,43 @@ namespace PrimeNumbers.IntegrationTests
         }
 
         [Theory]
-        [InlineData(10, false)]
-        [InlineData(11, true)]
-        [InlineData(-1, false)]
-        [InlineData(100003, true)]
-        [InlineData(100004, false)]
-        public async Task Check_Is_Prime_Number_Returns_OK(int number, bool isPrimerNumber)
+        [InlineData("10", 11)]
+        [InlineData("13", 13)]
+        [InlineData("-10", 2)]
+        [InlineData("123", 127)]
+        public async Task Get_Next_If_Not_Prime_Or_Current_Returns_OK(string number, int outputNumber)
         {
-            var request = new API.Models.Requests.CheckIsPrimeNumberRequest
+            var request = new GetNextIfNotPrimeOrCurrentRequest
             {
                 Number = number
             };
 
             var queryString = _queryStringFactory.Create(request);
 
-            var result = await _client.GetAsync($"api/prime-numbers/check{queryString}");
+            var result = await _client.GetAsync($"api/prime-numbers/next{queryString}");
 
             var content = await result.Content.ReadAsStringAsync();
 
-            var response = JsonConvert.DeserializeObject<CheckIsPrimeNumberResponse>(content);
+            var response = JsonConvert.DeserializeObject<GetNextIfNotPrimeOrCurrentResponse>(content);
 
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
-            Assert.Equal(isPrimerNumber, response.IsPrime);
+            Assert.Equal(outputNumber, response.Number);
         }
 
         [Theory]
+        [InlineData("")]
+        [InlineData("asd")]
         [InlineData(null)]
-        public async Task Check_Is_Prime_Number_Returns_BAD_REQUEST(int? number)
+        public async Task Get_Next_If_Not_Prime_Or_Current_Returns_BAD_REQUEST(string number)
         {
-            var request = new API.Models.Requests.CheckIsPrimeNumberRequest
+            var request = new GetNextIfNotPrimeOrCurrentRequest
             {
                 Number = number
             };
 
             var queryString = _queryStringFactory.Create(request);
 
-            var result = await _client.GetAsync($"api/prime-numbers/check{queryString}");
+            var result = await _client.GetAsync($"api/prime-numbers/next{queryString}");
 
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);            
         }

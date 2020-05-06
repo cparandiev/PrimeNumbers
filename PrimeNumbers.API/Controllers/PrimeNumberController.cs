@@ -22,12 +22,15 @@ namespace PrimeNumbers.API.Controllers
         /// <param name="request"></param>
         /// <returns>The next prime number</returns>
         /// <response code="200">Returns the next prime number</response>
+        /// <response code="400">Returns the user error</response>
         [HttpGet("next")]
         public async Task<ActionResult<GetNextIfNotPrimeOrCurrentResponse>> Next([FromQuery] GetNextIfNotPrimeOrCurrentRequest request)
         {
             var query = Mapper.Map<GetNextIfNotPrimeOrCurrentQuery>(request);
-            var response = await Mediator.Send(query);
-            return Mapper.Map<GetNextIfNotPrimeOrCurrentResponse>(response);
+            var nextPrimeNumberVm = await Mediator.Send(query);
+            var response = Mapper.Map<GetNextIfNotPrimeOrCurrentResponse>(nextPrimeNumberVm);
+
+            return response;
         }
 
         /// <summary>
@@ -41,12 +44,16 @@ namespace PrimeNumbers.API.Controllers
         /// </remarks>
         /// <param name="request"></param>
         /// <returns></returns>
+        /// <response code="200">Returns result if the the given number is a prime number</response>
+        /// <response code="400">Returns the user error</response>
         [HttpGet("check")]
         public async Task<ActionResult<CheckIsPrimeNumberResponse>> Check([FromQuery] CheckIsPrimeNumberRequest request)
         {
             var query = Mapper.Map<CheckIsPrimeNumberQuery>(request);
-            var response = await Mediator.Send(query);
-            return Mapper.Map<CheckIsPrimeNumberResponse>(response);
+            var primeNumberVm = await Mediator.Send(query);
+            var response = Mapper.Map<CheckIsPrimeNumberResponse>(primeNumberVm);
+
+            return response;
         }
     }
 }
