@@ -1,7 +1,7 @@
 ﻿using Http.QueryString.Factories;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
-using PrimeNumbers.API.Models.Requests;
+using PrimeNumbers.IntegrationTests.Models.Requests;
 using PrimeNumbers.IntegrationTests.Models.Responses;
 using System.Net;
 using System.Net.Http;
@@ -26,14 +26,14 @@ namespace PrimeNumbers.IntegrationTests
         }
 
         [Theory]
-        [InlineData(10, false)]
-        [InlineData(11, true)]
-        [InlineData(-1, false)]
-        [InlineData(100003, true)]
-        [InlineData(100004, false)]
-        public async Task Check_Is_Prime_Number_Returns_OK(int number, bool isPrimerNumber)
+        [InlineData("10", false)]
+        [InlineData("11", true)]
+        [InlineData("-1", false)]
+        [InlineData("100003", true)]
+        [InlineData("100004", false)]
+        public async Task Check_Is_Prime_Number_Returns_OK(string number, bool isPrimerNumber)
         {
-            var request = new API.Models.Requests.CheckIsPrimeNumberRequest
+            var request = new CheckIsPrimeNumberRequest
             {
                 Number = number
             };
@@ -52,9 +52,11 @@ namespace PrimeNumbers.IntegrationTests
 
         [Theory]
         [InlineData(null)]
-        public async Task Check_Is_Prime_Number_Returns_BAD_REQUEST(int? number)
+        [InlineData("")]
+        [InlineData("asd")]
+        public async Task Check_Is_Prime_Number_Returns_BAD_REQUEST(string number)
         {
-            var request = new API.Models.Requests.CheckIsPrimeNumberRequest
+            var request = new CheckIsPrimeNumberRequest
             {
                 Number = number
             };
