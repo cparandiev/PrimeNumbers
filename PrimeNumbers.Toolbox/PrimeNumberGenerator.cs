@@ -15,7 +15,14 @@ namespace PrimeNumbers.Toolbox
 
         public async Task<int> GetNextPrimeNumberAsync(int number)
         {
-            for (int i = number + 1; i < int.MaxValue; i++)
+            if(number == int.MaxValue)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
+            int i = number + 1;
+
+            while (i <= int.MaxValue)
             {
                 var isPrime = await _primeNumberChecker.CheckAsync(i);
 
@@ -23,6 +30,8 @@ namespace PrimeNumbers.Toolbox
                 {
                     return i;
                 }
+
+                i++;
             }
 
             throw new ArgumentOutOfRangeException();

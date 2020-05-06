@@ -1,7 +1,12 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using MediatR;
 using PrimeNumbers.Application.Common.Interfaces;
+using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using ValidationException = PrimeNumbers.Application.Common.Exceptions.ValidationException;
 
 namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent
 {
@@ -25,7 +30,15 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurren
 
             if (!isPrimeNumber)
             {
-                nextPrimeNumber = await _primeNumberGenerator.GetNextPrimeNumberAsync(request.Number.Value);
+                try
+                {
+                    nextPrimeNumber = await _primeNumberGenerator.GetNextPrimeNumberAsync(request.Number.Value);
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    var validationFailure = new ValidationFailure(nameof(request.Number), "The number is too big and it's currently not supported.");
+                    throw new ValidationException(new List<ValidationFailure>() { validationFailure });
+                }
             }
 
             var response = new NextPrimeNumberVm(nextPrimeNumber);
