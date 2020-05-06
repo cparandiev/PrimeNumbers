@@ -64,11 +64,7 @@ namespace PrimeNumbers.API
             
             app.UseCustomExceptionHandler();
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

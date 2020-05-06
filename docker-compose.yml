@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  primenumbers.api:
+    image: ${DOCKER_REGISTRY-}primenumbersapi
+    build:
+      context: .
+      dockerfile: PrimeNumbers.API/Dockerfile
