@@ -1,12 +1,13 @@
-﻿using PrimeNumbers.Application.Models.ServiceModels;
+﻿using PrimeNumbers.Application.Models.Requests;
+using PrimeNumbers.Application.Models.Responses;
 using System.Threading.Tasks;
 
 namespace PrimeNumbers.Application.Interfaces
 {
     public interface IPrimeNumberService
     {
-        Task<CheckIsPrimeNumberServiceModelResponse> CheckIsPrimeNumber(CheckIsPrimeNumberServiceModelRequest request);
+        Task<CheckIsPrimeNumberServiceResponse> CheckIsPrimeNumber(CheckIsPrimeNumberServiceRequest request);
         
-        Task<GetNextIfNotPrimeOrCurrentServiceModelResponse> GetNextIfNotPrimeOrCurrent(GetNextIfNotPrimeOrCurrentServiceModelRequest request);
+        Task<GetNextIfNotPrimeOrCurrentServiceResponse> GetNextIfNotPrimeOrCurrent(GetNextIfNotPrimeOrCurrentServiceRequest request);
     }
 }

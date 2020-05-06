@@ -2,7 +2,7 @@
 using PrimeNumbers.API.Models.Requests;
 using PrimeNumbers.API.Models.Responses;
 using PrimeNumbers.Application.Interfaces;
-using PrimeNumbers.Application.Models.ServiceModels;
+using PrimeNumbers.Application.Models.Requests;
 using System.Threading.Tasks;
 
 namespace PrimeNumbers.API.Controllers
@@ -20,14 +20,14 @@ namespace PrimeNumbers.API.Controllers
         [HttpGet("next")]
         public async Task<ActionResult<GetNextIfNotPrimeOrCurrentResponse>> Next([FromQuery] GetNextIfNotPrimeOrCurrentRequest request)
         {
-            var response = await _primeNumberService.GetNextIfNotPrimeOrCurrent(Mapper.Map<GetNextIfNotPrimeOrCurrentServiceModelRequest>(request));
+            var response = await _primeNumberService.GetNextIfNotPrimeOrCurrent(Mapper.Map<GetNextIfNotPrimeOrCurrentServiceRequest>(request));
             return Mapper.Map<GetNextIfNotPrimeOrCurrentResponse>(response);
         }
 
         [HttpGet("check")]
         public async Task<ActionResult<CheckIsPrimeNumberResponse>> Check([FromQuery] CheckIsPrimeNumberRequest request)
         {
-            var response = await _primeNumberService.CheckIsPrimeNumber(Mapper.Map<CheckIsPrimeNumberServiceModelRequest>(request));
+            var response = await _primeNumberService.CheckIsPrimeNumber(Mapper.Map<CheckIsPrimeNumberServiceRequest>(request));
             return Mapper.Map<CheckIsPrimeNumberResponse>(response);
         }
     }

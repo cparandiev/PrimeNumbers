@@ -1,5 +1,6 @@
 ﻿using PrimeNumbers.Application.Interfaces;
-using PrimeNumbers.Application.Models.ServiceModels;
+using PrimeNumbers.Application.Models.Requests;
+using PrimeNumbers.Application.Models.Responses;
 using System.Threading.Tasks;
 
 namespace PrimeNumbers.Application.Services
@@ -15,15 +16,15 @@ namespace PrimeNumbers.Application.Services
             _primeNumberChecker = primeNumberChecker;
         }
 
-        public async Task<CheckIsPrimeNumberServiceModelResponse> CheckIsPrimeNumber(CheckIsPrimeNumberServiceModelRequest request)
+        public async Task<CheckIsPrimeNumberServiceResponse> CheckIsPrimeNumber(CheckIsPrimeNumberServiceRequest request)
         {
             var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number);
-            var response = new CheckIsPrimeNumberServiceModelResponse(request.Number, isPrimeNumber);
+            var response = new CheckIsPrimeNumberServiceResponse(request.Number, isPrimeNumber);
 
             return response;
         }
 
-        public async Task<GetNextIfNotPrimeOrCurrentServiceModelResponse> GetNextIfNotPrimeOrCurrent(GetNextIfNotPrimeOrCurrentServiceModelRequest request)
+        public async Task<GetNextIfNotPrimeOrCurrentServiceResponse> GetNextIfNotPrimeOrCurrent(GetNextIfNotPrimeOrCurrentServiceRequest request)
         {
             var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number);
 
@@ -34,7 +35,7 @@ namespace PrimeNumbers.Application.Services
                 nextPrimeNumber = await _primeNumberGenerator.GetNextPrimeNumberAsync(request.Number);
             }
 
-            var response = new GetNextIfNotPrimeOrCurrentServiceModelResponse(nextPrimeNumber);
+            var response = new GetNextIfNotPrimeOrCurrentServiceResponse(nextPrimeNumber);
 
             return response;
         }

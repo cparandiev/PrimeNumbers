@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PrimeNumbers.API.Models.Responses;
-using PrimeNumbers.Application.Models.ServiceModels;
+using PrimeNumbers.Application.Models.Responses;
 
 namespace PrimeNumbers.API.Profiles
 {
@@ -8,8 +8,8 @@ namespace PrimeNumbers.API.Profiles
     {
         public ServiceResponseToResponseProfile()
         {
-            CreateMap<GetNextIfNotPrimeOrCurrentServiceModelResponse, GetNextIfNotPrimeOrCurrentResponse>();
-            CreateMap<CheckIsPrimeNumberServiceModelResponse, CheckIsPrimeNumberResponse>();
+            CreateMap<GetNextIfNotPrimeOrCurrentServiceResponse, GetNextIfNotPrimeOrCurrentResponse>();
+            CreateMap<CheckIsPrimeNumberServiceResponse, CheckIsPrimeNumberResponse>();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PrimeNumbers.API.Models.Requests;
-using PrimeNumbers.Application.Models.ServiceModels;
+using PrimeNumbers.Application.Models.Requests;
 
 namespace PrimeNumbers.API.Profiles
 {
@@ -8,8 +8,8 @@ namespace PrimeNumbers.API.Profiles
     {
         public RequestToServiceRequestProfile()
         {
-            CreateMap<CheckIsPrimeNumberRequest, CheckIsPrimeNumberServiceModelRequest>();
-            CreateMap<GetNextIfNotPrimeOrCurrentRequest, GetNextIfNotPrimeOrCurrentServiceModelRequest>();
+            CreateMap<CheckIsPrimeNumberRequest, CheckIsPrimeNumberServiceRequest>();
+            CreateMap<GetNextIfNotPrimeOrCurrentRequest, GetNextIfNotPrimeOrCurrentServiceRequest>();
         }
     }
 }
