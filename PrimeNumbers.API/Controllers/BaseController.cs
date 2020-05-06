@@ -12,7 +12,7 @@ namespace PrimeNumbers.API.Controllers
         private IMapper _mapper;
         private IMediator _mediator;
 
-        protected IMapper Mapper => _mapper ?? (_mapper = HttpContext.RequestServices.GetService<IMapper>());
+        protected IMapper Mapper => _mapper ??= HttpContext.RequestServices.GetService<IMapper>();
 
         protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
     }
