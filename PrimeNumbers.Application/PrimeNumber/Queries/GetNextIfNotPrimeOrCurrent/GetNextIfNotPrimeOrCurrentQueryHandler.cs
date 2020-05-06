@@ -10,7 +10,7 @@ using ValidationException = PrimeNumbers.Application.Common.Exceptions.Validatio
 
 namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent
 {
-    public class GetNextIfNotPrimeOrCurrentQueryHandler : IRequestHandler<GetNextIfNotPrimeOrCurrentQuery, NextPrimeNumberVm>
+    public class GetNextIfNotPrimeOrCurrentQueryHandler : IRequestHandler<GetNextIfNotPrimeOrCurrentQuery, NextPrimeNumberDto>
     {
         private readonly IPrimeNumberGenerator _primeNumberGenerator;
         private readonly IPrimeNumberChecker _primeNumberChecker;
@@ -22,7 +22,7 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurren
             _primeNumberChecker = primeNumberChecker;
         }
 
-        public async Task<NextPrimeNumberVm> Handle(GetNextIfNotPrimeOrCurrentQuery request, CancellationToken cancellationToken)
+        public async Task<NextPrimeNumberDto> Handle(GetNextIfNotPrimeOrCurrentQuery request, CancellationToken cancellationToken)
         {
             var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number.Value);
 
@@ -41,7 +41,7 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurren
                 }
             }
 
-            var response = new NextPrimeNumberVm(nextPrimeNumber);
+            var response = new NextPrimeNumberDto(nextPrimeNumber);
 
             return response;
         }

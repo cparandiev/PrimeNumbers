@@ -2,7 +2,7 @@
 
 namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent
 {
-    public class GetNextIfNotPrimeOrCurrentQuery : IRequest<NextPrimeNumberVm>
+    public class GetNextIfNotPrimeOrCurrentQuery : IRequest<NextPrimeNumberDto>
     {
         public GetNextIfNotPrimeOrCurrentQuery(int? number)
         {

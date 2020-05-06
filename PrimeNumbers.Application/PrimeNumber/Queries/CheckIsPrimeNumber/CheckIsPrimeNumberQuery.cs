@@ -2,7 +2,7 @@
 
 namespace PrimeNumbers.Application.PrimeNumber.Queries.CheckIsPrimeNumber
 {
-    public class CheckIsPrimeNumberQuery : IRequest<PrimeNumberVm>
+    public class CheckIsPrimeNumberQuery : IRequest<PrimeNumberDto>
     {
         public CheckIsPrimeNumberQuery(int? number)
         {

@@ -5,12 +5,12 @@ using PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent;
 
 namespace PrimeNumbers.API.Profiles
 {
-    public class ViewModelToResponseProfile : Profile
+    public class DtoToResponseProfile : Profile
     {
-        public ViewModelToResponseProfile()
+        public DtoToResponseProfile()
         {
-            CreateMap<NextPrimeNumberVm, GetNextIfNotPrimeOrCurrentResponse>();
-            CreateMap<PrimeNumberVm, CheckIsPrimeNumberResponse>();
+            CreateMap<NextPrimeNumberDto, GetNextIfNotPrimeOrCurrentResponse>();
+            CreateMap<PrimeNumberDto, CheckIsPrimeNumberResponse>();
         }
     }
 }

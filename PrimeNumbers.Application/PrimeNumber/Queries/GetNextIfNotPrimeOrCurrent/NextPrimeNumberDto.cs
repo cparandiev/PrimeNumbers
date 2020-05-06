@@ -1,8 +1,8 @@
 ﻿namespace PrimeNumbers.Application.PrimeNumber.Queries.GetNextIfNotPrimeOrCurrent
 {
-    public class NextPrimeNumberVm
+    public class NextPrimeNumberDto
     {
-        public NextPrimeNumberVm(int number)
+        public NextPrimeNumberDto(int number)
         {
             Number = number;
         }

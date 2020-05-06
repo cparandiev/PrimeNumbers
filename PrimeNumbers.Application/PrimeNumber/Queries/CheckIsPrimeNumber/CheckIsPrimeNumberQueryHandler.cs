@@ -5,7 +5,7 @@ using PrimeNumbers.Application.Common.Interfaces;
 
 namespace PrimeNumbers.Application.PrimeNumber.Queries.CheckIsPrimeNumber
 {
-    public class CheckIsPrimeNumberQueryHandler : IRequestHandler<CheckIsPrimeNumberQuery, PrimeNumberVm>
+    public class CheckIsPrimeNumberQueryHandler : IRequestHandler<CheckIsPrimeNumberQuery, PrimeNumberDto>
     {
         private readonly IPrimeNumberChecker _primeNumberChecker;
 
@@ -13,10 +13,10 @@ namespace PrimeNumbers.Application.PrimeNumber.Queries.CheckIsPrimeNumber
         {
             _primeNumberChecker = primeNumberChecker;
         }
-        public async Task<PrimeNumberVm> Handle(CheckIsPrimeNumberQuery request, CancellationToken cancellationToken)
+        public async Task<PrimeNumberDto> Handle(CheckIsPrimeNumberQuery request, CancellationToken cancellationToken)
         {
             var isPrimeNumber = await _primeNumberChecker.CheckAsync(request.Number.Value);
-            var response = new PrimeNumberVm(request.Number.Value, isPrimeNumber);
+            var response = new PrimeNumberDto(request.Number.Value, isPrimeNumber);
 
             return response;
         }

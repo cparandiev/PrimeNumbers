@@ -1,8 +1,8 @@
 ﻿namespace PrimeNumbers.Application.PrimeNumber.Queries.CheckIsPrimeNumber
 {
-    public class PrimeNumberVm
+    public class PrimeNumberDto
     {
-        public PrimeNumberVm(int number, bool isPrime)
+        public PrimeNumberDto(int number, bool isPrime)
         {
             Number = number;
             IsPrime = isPrime;
